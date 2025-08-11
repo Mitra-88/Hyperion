@@ -1,4 +1,4 @@
-package me.vermeil.hyperion;
+package dev.mitra88.hyperion;
 
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -43,6 +44,20 @@ public class HyperionEventListener implements Listener {
             applyHealingEffects(player);
             setHealingCooldown(player);
         }
+    }
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageEvent event) {
+        if (event.getEntity() instanceof Player player) {
+            if (event.getCause() == EntityDamageEvent.DamageCause.FALL && isHoldingHyperion(player)) {
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    private boolean isHoldingHyperion(Player player) {
+        return HyperionBuilder.isHyperion(player.getInventory().getItemInMainHand()) ||
+                HyperionBuilder.isHyperion(player.getInventory().getItemInOffHand());
     }
 
     private void teleportPlayer(Player player) {

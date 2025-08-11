@@ -1,11 +1,11 @@
 name: Hyperion
 version: '${project.version}'
-main: me.vermeil.hyperion.Hyperion
+main: dev.mitra88.hyperion.Hyperion
 api-version: '1.21'
 load: STARTUP
-authors: [VermeilChan]
+authors: [Mitra-88]
 description: Hyperion is a Spigot plugin inspired by the Hyperion abilities from the Hypixel Skyblock.
-website: https://github.com/VermeilChan/Hyperion
+website: https://github.com/Mitra-88/Hyperion
 commands:
   givehyperion:
     usage: /givehyperion

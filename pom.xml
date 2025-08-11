@@ -6,13 +6,13 @@
 
   <groupId>me.vermeil</groupId>
   <artifactId>Hyperion</artifactId>
-  <version>1.7.0</version>
+  <version>1.8.0</version>
   <packaging>jar</packaging>
 
   <name>Hyperion</name>
 
   <properties>
-    <java.version>1.8</java.version>
+    <java.version>17</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -64,7 +64,7 @@
       <dependency>
           <groupId>org.spigotmc</groupId>
           <artifactId>spigot-api</artifactId>
-          <version>1.21.5-R0.1-SNAPSHOT</version>
+          <version>1.21.8-R0.1-SNAPSHOT</version>
           <scope>provided</scope>
       </dependency>
   </dependencies>

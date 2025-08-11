@@ -1,4 +1,4 @@
-package me.vermeil.hyperion;
+package dev.mitra88.hyperion;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
