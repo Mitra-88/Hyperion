@@ -15,7 +15,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.List;
-import java.util.Objects;
 
 public class HyperionBuilder {
 
@@ -40,7 +39,6 @@ public class HyperionBuilder {
                 mm("<gray>Bonus Attack Speed: <red>+7% <blue>(+7%) <dark_gray>(+10.5%)"),
                 mm("<gray>Intelligence: <green>+634 <blue>(+125) <light_purple>(+24) <dark_gray>(+3,743.75)"),
                 mm("<gray>Ferocity: <green>+33 <dark_gray>(+45)"),
-                mm("<dark_purple>[<aqua>✎<dark_purple>] <dark_purple>[<aqua>⚔<dark_purple>]"),
                 mm("<dark_purple>[<aqua>✎<dark_purple>] <dark_purple>[<aqua>⚔<dark_purple>]"),
                 Component.empty(),
                 mm("<light_purple><bold>Ultimate Wise V<blue>, <blue>Champion X, Cleave VI"),
@@ -81,6 +79,7 @@ public class HyperionBuilder {
         }
 
         meta.setUnbreakable(true);
+        meta.getPersistentDataContainer().set(Hyperion.HYPERION_KEY, PersistentDataType.BYTE, (byte) 1);
         hyperionSword.setItemMeta(meta);
 
         //noinspection UnstableApiUsage
@@ -96,28 +95,13 @@ public class HyperionBuilder {
                         )
                         .build());
 
-        meta = hyperionSword.getItemMeta();
-        meta.getPersistentDataContainer().set(Hyperion.HYPERION_KEY, PersistentDataType.BYTE, (byte) 1);
-        hyperionSword.setItemMeta(meta);
-
         return hyperionSword;
     }
 
     public static boolean isHyperion(ItemStack item) {
-        if (item == null || item.getType() != Material.IRON_SWORD) {
+        if (item == null || !item.hasItemMeta()) {
             return false;
         }
-
-        if (!item.hasItemMeta()) {
-            return false;
-        }
-
-        ItemMeta meta = item.getItemMeta();
-        if (!Objects.requireNonNull(meta).hasDisplayName()) {
-            return false;
-        }
-
-        Component expectedDisplayName = mm("<light_purple>Shiny Heroic Hyperion <gold>✪✪✪✪<red>➎");
-        return Objects.equals(meta.displayName(), expectedDisplayName);
+        return item.getItemMeta().getPersistentDataContainer().has(Hyperion.HYPERION_KEY, PersistentDataType.BYTE);
     }
 }
