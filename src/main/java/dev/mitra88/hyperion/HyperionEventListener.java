@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 
 import java.util.*;
 
@@ -22,10 +23,11 @@ public class HyperionEventListener implements Listener {
     private final Map<UUID, Long> healingCooldowns = new HashMap<>();
     private static final double TELEPORT_MAX_DISTANCE = 10.0;
     private static final double TELEPORT_STEP = 0.5;
-    private static final double DAMAGE_MIN = 30000;
+    private static final double DAMAGE_MIN = 20000;
     private static final double DAMAGE_MAX = 50000;
-    private static final double DAMAGE_RANGE = 5.0;
+    private static final double DAMAGE_RADIUS = 6.0;
     private static final long HEALING_COOLDOWN = 5000L;
+    private static final MiniMessage MM = MiniMessage.miniMessage();
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
@@ -84,7 +86,7 @@ public class HyperionEventListener implements Listener {
         double damage = DAMAGE_MIN + (Math.random() * (DAMAGE_MAX - DAMAGE_MIN));
         int entitiesDamaged = 0;
 
-        for (Entity entity : player.getNearbyEntities(DAMAGE_RANGE, DAMAGE_RANGE, DAMAGE_RANGE)) {
+        for (Entity entity : player.getNearbyEntities(DAMAGE_RADIUS, DAMAGE_RADIUS, DAMAGE_RADIUS)) {
             if (entity instanceof LivingEntity && !(entity instanceof Player)) {
                 ((LivingEntity) entity).damage(damage);
                 entitiesDamaged++;
@@ -96,8 +98,12 @@ public class HyperionEventListener implements Listener {
     private void notifyPlayerOfDamage(Player player, int entitiesDamaged) {
         if (entitiesDamaged > 0) {
             double totalDamage = entitiesDamaged * (DAMAGE_MIN + (Math.random() * (DAMAGE_MAX - DAMAGE_MIN)));
-            String message = ChatColor.GRAY + "Your Implosion hit " + ChatColor.RED + entitiesDamaged + ChatColor.GRAY + " enemies for " + ChatColor.RED + String.format("%.2f", totalDamage) + ChatColor.GRAY + " damage.";
-            player.sendMessage(message);
+            String formattedDamage = String.format("%.2f", totalDamage);
+            String message = String.format(
+                    "<gray>Your Implosion hit <red>%d <gray>enemies for <red>%s <gray>damage.",
+                    entitiesDamaged, formattedDamage
+            );
+            player.sendMessage(MM.deserialize(message));
         }
     }
 
@@ -107,9 +113,9 @@ public class HyperionEventListener implements Listener {
     }
 
     private void applyHealingEffects(Player player) {
-        player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, PotionEffect.INFINITE_DURATION, 20));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 10));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 100, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 100, 5));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 100, 5));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.INSTANT_HEALTH, 1, 10));
 
         World world = player.getWorld();
         Location playerLocation = player.getLocation();

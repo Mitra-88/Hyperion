@@ -1,25 +1,22 @@
 package dev.mitra88.hyperion;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import io.papermc.paper.command.brigadier.BasicCommand;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
-@SuppressWarnings("ALL")
-public class HyperionCommand implements CommandExecutor {
+public class HyperionCommand implements BasicCommand {
+
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            return true;
+    public void execute(@NonNull CommandSourceStack source, String @NonNull [] args) {
+        if (!(source.getSender() instanceof Player player)) {
+            return;
         }
 
-        Player player = (Player) sender;
-
-        ItemStack hyperionSword = HyperionBuilder.giveHyperion();
-        player.getInventory().addItem(hyperionSword);
-        player.sendMessage(ColorUtils.color("&aYou have received the Hyperion"));
-
-        return true;
+        ItemStack aspectOfTheVoid = HyperionBuilder.giveHyperion();
+        player.getInventory().addItem(aspectOfTheVoid);
+        player.sendMessage(MiniMessage.miniMessage().deserialize("<green>You have received the Hyperion."));
     }
 }
