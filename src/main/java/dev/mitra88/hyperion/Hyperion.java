@@ -5,23 +5,33 @@ import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Hyperion extends JavaPlugin {
+public final class Hyperion extends JavaPlugin {
 
-    public static NamespacedKey HYPERION_KEY;
+    public static final NamespacedKey HYPERION_KEY = new NamespacedKey("hyperion", "hyperion");
+
+    private HyperionConfig config;
+    private HyperionEventListener listener;
 
     @Override
     public void onEnable() {
-        HYPERION_KEY = new NamespacedKey(this, "hyperion");
+        saveDefaultConfig();
+        config = new HyperionConfig(this);
+        listener = new HyperionEventListener(config);
+        getServer().getPluginManager().registerEvents(listener, this);
 
-        getServer().getPluginManager().registerEvents(new HyperionEventListener(), this);
-
-        this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
-            final Commands commands = event.registrar();
-            commands.register(
-                    "givehyperion",
+        getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+            Commands commands = event.registrar();
+            commands.register("givehyperion",
                     "Gives the Hyperion sword to the player.",
-                    new HyperionCommand()
-            );
+                    new HyperionCommand(config, false));
+            commands.register("hyperionreload",
+                    "Reloads the Hyperion configuration.",
+                    new HyperionCommand(config, true));
         });
+    }
+
+    @Override
+    public void onDisable() {
+        if (listener != null) listener.cleanup();
     }
 }

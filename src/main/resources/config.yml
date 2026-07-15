@@ -1,0 +1,109 @@
+# Hyperion Configuration
+
+teleport:
+  # Maximum distance (in blocks) the player can teleport forward.
+  max-distance: 10.0
+
+  # Distance per step when checking for collisions along the teleport path.
+  # Smaller values are more precise but slightly heavier on performance.
+  step: 0.5
+
+  # Sound played at the destination after teleporting.
+  sound: ENTITY_GENERIC_EXPLODE
+  sound-volume: 1.0
+  sound-pitch: 1.0
+
+damage:
+  # Random damage range dealt to nearby enemies on teleport. 
+  # Use equal values to make it fixed.
+  min: 20000.0
+  max: 50000.0
+
+  # Radius (in blocks) around the player to damage enemies.
+  radius: 6.0
+
+healing:
+  # Cooldown (ms) between activating the healing and absorption effects.
+  cooldown-ms: 5000
+
+  # Potion effects applied on activation.
+  # Duration is in ticks (20 ticks = 1 second). Amplifier is the level (0 = Level I).
+  resistance-effect: resistance
+  resistance-duration: 100
+  resistance-amplifier: 5
+
+  absorption-effect: absorption
+  absorption-duration: 100
+  absorption-amplifier: 5
+
+  instant-health-effect: instant_health
+  instant-health-duration: 1
+  instant-health-amplifier: 10
+
+  # Sound played when the healing effects are applied.
+  sound: ENTITY_ZOMBIE_VILLAGER_CURE
+  sound-volume: 1.0
+  sound-pitch: 1.0
+
+item:
+  # Base material of the Hyperion item.
+  material: IRON_SWORD
+
+  # MiniMessage-formatted display name.
+  display-name: "<light_purple>Shiny Heroic Hyperion <gold>✪✪✪✪<red>➎"
+
+  # MiniMessage-formatted lore lines. Use an empty string for a blank line.
+  lore:
+    - "<gray>Gear Score: <light_purple>1315 <dark_gray>(5000)"
+    - "<gray>Damage: <red>366 <yellow>(+30) <dark_gray>(+2,125)"
+    - "<gray>Strength: <red>250 <yellow>(+30) <gold>[+5] <blue>(+50) <dark_gray>(+1,468.75)"
+    - "<gray>Crit Damage: <red>+70% <dark_gray>(+437.5%)"
+    - "<gray>Bonus Attack Speed: <red>+7% <blue>(+7%) <dark_gray>(+10.5%)"
+    - "<gray>Intelligence: <green>+634 <blue>(+125) <light_purple>(+24) <dark_gray>(+3,743.75)"
+    - "<gray>Ferocity: <green>+33 <dark_gray>(+45)"
+    - "<dark_purple>[<aqua>✎<dark_purple>] <dark_purple>[<aqua>⚔<dark_purple>]"
+    - ""
+    - "<light_purple><bold>Ultimate Wise V<blue>, <blue>Champion X, Cleave VI"
+    - "<blue>Critical VII, Cubism VI, Divine Gift III"
+    - "<blue>Dragon Hunter V, Ender Slayer VII, Execute VI"
+    - "<blue>Experience V, Fire Aspect III, First Strike IV"
+    - "<blue>Giant Killer VII, Impaling III, Lethality VI"
+    - "<blue>Looting V, Luck VII, Mana Steal III"
+    - "<blue>Scavenger V, Smite VII, Smoldering V"
+    - "<blue>Tabasco III, Thunderlord VII, Vampirism VI"
+    - "<blue>Venomous VI"
+    - ""
+    - "<aqua>Music Rune III"
+    - ""
+    - "<gray>Deals +<red>50% <gray>damage to Withers."
+    - "<gray>Grants <red>+1 ❁ Damage <gray>and <green>+2 <aqua>✎"
+    - "<aqua>Intelligence <gray>per <red>Catacombs <gray>level."
+    - ""
+    - "<green>Scroll Abilities:"
+    - "<gold>Ability: Wither Impact <yellow><bold>RIGHT CLICK"
+    - "<gray>Teleport <green>10 blocks<gray> ahead of you."
+    - "<gray>Then implode dealing <red>145,720.2 <gray>damage"
+    - "<gray>to nearby enemies. Also applies the"
+    - "<gray>wither shield scroll ability reducing"
+    - "<gray>damage taken and granting an"
+    - "<gray>absorption shield for <yellow>5 <gray>seconds."
+    - "<dark_gray>Mana Cost: <dark_aqua>150"
+    - ""
+    - "<light_purple><bold><obfuscated>A</obfuscated> SHINY MYTHIC DUNGEON SWORD <obfuscated>A</obfuscated>"
+
+  # Whether the item is unbreakable.
+  unbreakable: true
+
+  # Enchantments applied to the item. Keys are namespaced IDs.
+  enchantments:
+    minecraft:unbreaking: 100
+
+  # Data component types hidden from the tooltip. Names must match a public
+  # static field on io.papermc.paper.datacomponent.DataComponentTypes.
+  tooltip-hidden-components:
+    - UNBREAKABLE
+    - ENCHANTMENTS
+    - STORED_ENCHANTMENTS
+    - ATTRIBUTE_MODIFIERS
+    - TRIM
+    - DYED_COLOR
