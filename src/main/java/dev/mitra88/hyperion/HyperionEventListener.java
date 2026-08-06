@@ -85,7 +85,7 @@ public final class HyperionEventListener implements Listener {
 
         var world = player.getWorld();
         world.playSound(cursor, config.teleportSound, config.teleportSoundVolume, config.teleportSoundPitch);
-        world.spawnParticle(Particle.EXPLOSION, cursor, 5);
+        world.spawnParticle(Particle.EXPLOSION_EMITTER, cursor, 1);
     }
 
     private void damageNearbyEntities(Player player) {
@@ -137,7 +137,7 @@ public final class HyperionEventListener implements Listener {
         Location loc = player.getLocation();
         var world = player.getWorld();
         world.playSound(loc, config.healingSound, config.healingSoundVolume, config.healingSoundPitch);
-        world.spawnParticle(Particle.EXPLOSION, loc, 1);
+        world.spawnParticle(Particle.EXPLOSION_EMITTER, loc, 1);
     }
 
     public void cleanup() {
