@@ -21,22 +21,18 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-@SuppressWarnings("UnstableApiUsage")
 public final class HyperionConfig {
 
-    // Teleport
     public double teleportMaxDistance;
     public double teleportStep;
     public Sound teleportSound;
     public float teleportSoundVolume;
     public float teleportSoundPitch;
 
-    // Damage (Implosion)
     public double damageMin;
     public double damageMax;
     public double damageRadius;
 
-    // Healing (Wither Shield)
     public long healingCooldownMs;
     public PotionEffectType resistanceEffect;
     public int resistanceDuration;
@@ -51,7 +47,6 @@ public final class HyperionConfig {
     public float healingSoundVolume;
     public float healingSoundPitch;
 
-    // Item
     public Material material;
     public String displayName;
     public List<String> lore;

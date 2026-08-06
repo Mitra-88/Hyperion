@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("UnstableApiUsage")
 public final class HyperionBuilder {
 
     private static final MiniMessage MM = MiniMessage.miniMessage();
