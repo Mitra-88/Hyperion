@@ -67,7 +67,7 @@ public final class HyperionConfig {
 
         this.teleportMaxDistance   = cfg.getDouble("teleport.max-distance", 10.0);
         this.teleportStep          = cfg.getDouble("teleport.step", 0.5);
-        this.teleportSound         = loadSound(cfg.getString("teleport.sound", "ENTITY_GENERIC_EXPLODE"));
+        this.teleportSound         = SoundRegistryMapper.get(cfg.getString("teleport.sound", "ENTITY_GENERIC_EXPLODE"), Sound.ENTITY_GENERIC_EXPLODE);
         this.teleportSoundVolume   = (float) cfg.getDouble("teleport.sound-volume", 1.0);
         this.teleportSoundPitch    = (float) cfg.getDouble("teleport.sound-pitch", 1.0);
 
@@ -85,7 +85,7 @@ public final class HyperionConfig {
         this.instantHealthEffect     = loadPotionEffect(cfg.getString("healing.instant-health-effect", "instant_health"));
         this.instantHealthDuration   = cfg.getInt("healing.instant-health-duration", 1);
         this.instantHealthAmplifier  = cfg.getInt("healing.instant-health-amplifier", 10);
-        this.healingSound            = loadSound(cfg.getString("healing.sound", "ENTITY_ZOMBIE_VILLAGER_CURE"));
+        this.healingSound            = SoundRegistryMapper.get(cfg.getString("healing.sound", "ENTITY_ZOMBIE_VILLAGER_CURE"), Sound.ENTITY_ZOMBIE_VILLAGER_CURE);
         this.healingSoundVolume      = (float) cfg.getDouble("healing.sound-volume", 1.0);
         this.healingSoundPitch       = (float) cfg.getDouble("healing.sound-pitch", 1.0);
 
@@ -104,14 +104,6 @@ public final class HyperionConfig {
         NamespacedKey key = parseKey(name);
         if (key == null) return null;
         return Registry.POTION_EFFECT_TYPE.get(key);
-    }
-
-    private static Sound loadSound(String name) {
-        if (name == null || name.isBlank()) return Sound.ENTITY_GENERIC_EXPLODE;
-        NamespacedKey key = parseKey(name);
-        if (key == null) return Sound.ENTITY_GENERIC_EXPLODE;
-        Sound sound = Registry.SOUNDS.get(key);
-        return sound != null ? sound : Sound.ENTITY_GENERIC_EXPLODE;
     }
 
     private static Map<NamespacedKey, Integer> loadEnchantments(ConfigurationSection section) {
