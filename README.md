@@ -21,7 +21,7 @@ Hyperion is a plugin inspired by the [Hyperion](https://wiki.hypixel.net/Hyperio
 | `/givehyperion`   | Gives the player a Hyperion.      | givehyperion.give     |
 | `/hyperionreload` | Reloads the plugin configuration. | hyperionreload.reload |
 
-> **Note:** No permissions are required. Any player can obtain and use the Hyperion
+> **Note:** The `/givehyperion` command is enabled for all players by default (`default: true`), but can be restricted using the `givehyperion.give` permission node.
 
 ## License
 - This plugin is licensed under the [GNU Affero General Public License v3.0](LICENSE).
